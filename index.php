@@ -41,7 +41,7 @@ if ($search !== '') {
 
 <header>
     <div class="topbar">
-        <h1>nykaa<span>.</span></h1>
+        <h1>nykaa<span></span></h1>
 
         <form action="index.php" method="GET" class="search">
             <input type="text" name="search"

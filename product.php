@@ -215,6 +215,79 @@ $allReviews = $stmt->get_result();
 </header>
 
 <section class="product-details">
+    
+<div class="nykaa-product">
+
+    <div class="nykaa-product-image">
+        <img
+            src="<?php echo htmlspecialchars($product['image_url'] ?? ''); ?>"
+            alt="<?php echo htmlspecialchars($product['name']); ?>"
+        >
+    </div>
+
+    <div class="nykaa-product-info">
+
+        <p class="product-brand">
+            <?php echo htmlspecialchars($product['brand']); ?>
+        </p>
+
+        <h1 class="product-title">
+            <?php echo htmlspecialchars($product['name']); ?>
+        </h1>
+
+        <p class="product-price">
+            ₹<?php echo number_format($product['price'], 2); ?>
+        </p>
+
+        <p class="product-stock">
+            <?php if ($product['stock'] > 0) { ?>
+                <span class="in-stock">✓ In Stock</span>
+            <?php } else { ?>
+                <span class="out-stock">Currently Out of Stock</span>
+            <?php } ?>
+        </p>
+
+        <div class="product-description">
+            <h3>Product Details</h3>
+            <p>
+                <?php echo htmlspecialchars($product['description']); ?>
+            </p>
+        </div>
+
+        <div class="product-actions">
+
+            <?php if ($product['stock'] > 0) { ?>
+                <form method="POST" class="action-form">
+                    <label>Quantity</label>
+                    <input type="number" name="quantity"
+                        value="1" min="1"
+                        max="<?php echo (int)$product['stock']; ?>">
+                    <button type="submit" name="add_to_cart"
+                        class="bag-button">
+                        🛍 ADD TO BAG
+                    </button>
+                </form>
+            <?php } else { ?>
+                <form method="POST">
+                    <button type="submit" name="notify_me"
+                        class="bag-button">
+                        🔔 NOTIFY ME
+                    </button>
+                </form>
+            <?php } ?>
+
+            <form method="POST">
+                <button type="submit" name="add_to_wishlist"
+                    class="wishlist-button">
+                    ♡ ADD TO WISHLIST
+                </button>
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
 
     <div class="detail-image">
        <img src="<?php echo htmlspecialchars($product['image_url'] ?? ''); ?>"
@@ -242,7 +315,7 @@ $allReviews = $stmt->get_result();
         <?php if ($message != "") { ?>
             <p class="message">
                 <?php echo htmlspecialchars($message); ?>
-            </p>
+            </p>="nykaa-product"
         <?php } ?>
 <div class="product-reviews">
     <h2>Customer Ratings & Reviews</h2>
